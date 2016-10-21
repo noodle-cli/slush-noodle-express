@@ -60,8 +60,8 @@ gulp.task('default', function (done) {
       name: 'moveon',
       message: 'Continue?'
     }
-  ])
-  .then(function (answers) {
+  ],
+  function (answers) {
     if (answers.github) {
       answers.github = answers.github.replace(/\/$/, '') + '/' + answers.name
     }

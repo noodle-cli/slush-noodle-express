@@ -7,6 +7,6 @@
     "port": 27017,
     "user": "",
     "pwd": "",
-    "authSource": "god"
+    "authSource": ""
   }
 }

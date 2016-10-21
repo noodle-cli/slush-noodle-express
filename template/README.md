@@ -1,2 +1,2 @@
-# slush-noodle-express
-> noodle express generator
+# <%= name %>
+> <%= description %>

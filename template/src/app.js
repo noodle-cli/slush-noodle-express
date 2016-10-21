@@ -2,12 +2,11 @@
 
 const express = require('express');
 const config = require('config');
-// const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const log4js = require('log4js');
 
-const loggerFormat = (process.env.NODE_ENV === 'development') ? 'dev' : 'combined';
+const logger = log4js.getLogger("cheese");
 const app = express();
 const port = config.port || 3000;
 
@@ -15,7 +14,7 @@ const port = config.port || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser());
 //logging
-app.use(logger(loggerFormat));
+app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
 app.use(cookieParser());
 
 //setting rotuer
@@ -23,16 +22,18 @@ app.use('/', require('./apis'));
 
 //handle 404
 app.use((req, res, next) => {
-  res.status(404).json({ err: 'Not found.' });
+  logger.info('Not found.');
+  res.status(404);
 });
 
 //error handle
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ err: 'Server error.' });
+  logger.info('Server error.');
+  res.status(err.status || 500);
 });
 
 //listen port
 app.listen(port);
-console.log('Listening on port' + config.port + ',' + 'god bless' + config.name + '!');
+logger.info('Listening on port' + config.port + ',' + 'god bless' + config.name + '!');
 
 module.exports = app;
