@@ -1,6 +1,6 @@
 {
   "name": "slush-noodle-express",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A express project template for noodle.",
   "main": "slushfile.js",
   "repository": {
